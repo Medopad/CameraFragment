@@ -44,33 +44,7 @@ public final class CameraHelper {
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static boolean hasCamera2(Context context) {
-        if (context == null) return false;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) return false;
-        try {
-            CameraManager manager = (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-            String[] idList = manager.getCameraIdList();
-            boolean notNull = true;
-            if (idList.length == 0) {
-                notNull = false;
-            } else {
-                for (final String str : idList) {
-                    if (str == null || str.trim().isEmpty()) {
-                        notNull = false;
-                        break;
-                    }
-                    final CameraCharacteristics characteristics = manager.getCameraCharacteristics(str);
-
-                    final int supportLevel = characteristics.get(CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL);
-                    if (supportLevel == CameraCharacteristics.INFO_SUPPORTED_HARDWARE_LEVEL_LEGACY) {
-                        notNull = false;
-                        break;
-                    }
-                }
-            }
-            return notNull;
-        } catch (Throwable ignore) {
-            return false;
-        }
+        return false;
     }
 
     public static File generateStorageDir(Context context, @Nullable String pathToDirectory) {
